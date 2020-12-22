@@ -1,0 +1,11 @@
+---
+- name: "Install WINE packages"
+  apt:
+    name:
+      [
+        "wine-installer",
+        "winetricks",
+        "wine-stable"
+      ]
+    state: latest
+  become: yes

@@ -1,0 +1,22 @@
+---
+- name: "Update apt repository"
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: "Update all packages"
+  apt:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: "Upgrade the OS"
+  apt:
+    upgrade: dist
+  become: yes
+
+- name: "Install custom packages"
+  apt:
+    name: "{{ default_packages }}"
+    state: latest
+  become: yes

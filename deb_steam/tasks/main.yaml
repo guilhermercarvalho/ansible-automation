@@ -1,0 +1,10 @@
+---
+- name: "Install DEB Package"
+  apt:
+    deb: "https://repo.steampowered.com/steam/archive/precise/steam_latest.deb"
+  become: yes
+
+- name: "Execute STEAM automatic installation"
+  shell:
+    cmd: "timeout 8m steam"
+  become: no

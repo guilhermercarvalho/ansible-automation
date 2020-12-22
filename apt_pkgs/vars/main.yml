@@ -1,0 +1,16 @@
+---
+default_packages:
+  [
+    "vlc",
+    "gimp",
+    "qbittorrent",
+    "keepassx",
+    "vim",
+    "remmina",
+    "htop",
+    "terminator",
+    "git",
+    "virtualbox",
+    "obs-studio",
+    "inkscape",
+  ]
