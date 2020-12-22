@@ -13,4 +13,5 @@ default_packages:
     "virtualbox",
     "obs-studio",
     "inkscape",
+    "rdfind"
   ]
