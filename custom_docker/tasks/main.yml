@@ -12,7 +12,7 @@
     state: latest
   become: yes
 
-- name: "Add docker GPG apt Key"
+- name: "Add docker GPG apt-key"
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
@@ -38,10 +38,11 @@
 
 - name: "Add default user to docker group"
   user:
-    name: "{{ user }}"
+    name: "{{ default_user }}"
     uid: 1000
     groups: ["docker"]
     append: yes
+  become: yes
 
 - name: "Enable docker service"
   systemd:

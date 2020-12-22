@@ -15,7 +15,7 @@
     upgrade: dist
   become: yes
 
-- name: "Install custom packages"
+- name: "Install preferred packages"
   apt:
     name: "{{ default_packages }}"
     state: latest

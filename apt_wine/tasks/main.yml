@@ -1,5 +1,5 @@
 ---
-- name: "Install WINE packages"
+- name: "Install wine packages"
   apt:
     name:
       [
