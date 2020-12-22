@@ -1,20 +1,7 @@
 ---
-- name: "Install Visual Studio Code"
+- name: "Install deb packages"
   apt:
-    deb: "{{ url_vscode }}"
+    deb: "{{ item.value }}"
+  with_items: "{{ lookup('dict', urls) }}"
   become: yes
     
-- name: "Install Google Chrome"
-  apt:
-    deb: "{{ url_chrome }}"
-  become: yes
-
-- name: "Install Insomnia"
-  apt:
-    deb: "{{ url_insomnia }}"
-  become: yes
-
-- name: "Install Discord"
-  apt:
-    deb: "{{ url_discord }}"
-  become: yes
