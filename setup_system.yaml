@@ -3,7 +3,6 @@
   roles:
     - apt_pkgs
     - deb_pkgs
-    - apt_wine
     - deb_dropbox
     - apt_spotify
     - custom_docker
