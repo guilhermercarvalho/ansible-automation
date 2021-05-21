@@ -1,7 +1,0 @@
----
-- name: "Install deb packages"
-  apt:
-    deb: "{{ item.value }}"
-  with_items: "{{ lookup('dict', urls) }}"
-  become: yes
-    

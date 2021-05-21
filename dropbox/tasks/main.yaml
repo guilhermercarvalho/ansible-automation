@@ -1,0 +1,20 @@
+---
+- name: Install dropbox package
+  apt:
+    deb: https://linux.dropbox.com/packages/ubuntu/dropbox_2020.03.04_amd64.deb
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install dependences
+  apt:
+    name: python3-gpg
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Change fedora version on dropbox repo
+  replace:
+    path: /etc/yum.repos.d/dropbox.repo
+    regexp: '\$releasever'
+    replace: '32'
+  become: yes
+  when: ansible_distribution == 'Fedora'

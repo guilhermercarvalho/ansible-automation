@@ -1,0 +1,16 @@
+---
+- name: Install RPM packages
+  dnf:
+    name: "{{ item.value }}"
+    disable_gpg_check: yes
+    state: present
+  with_items: "{{ lookup('dict', rpm_url) }}"
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install DEB packages
+  apt:
+    deb: "{{ item.value }}"
+  with_items: "{{ lookup('dict', deb_url) }}"
+  become: yes
+  when: ansible_distribution == 'Ubuntu'

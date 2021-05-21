@@ -1,0 +1,52 @@
+---
+pkgs:
+  [
+    qbittorrent,
+    keepassxc,
+    vim,
+    remmina,
+    htop,
+    terminator,
+    git,
+    inkscape,
+    rdfind,
+    neofetch,
+    vagrant,
+    xclip,
+    gparted,
+    filezilla,
+    bleachbit,
+    net-tools,
+    iotop,
+    sox,
+    screen,
+    speedtest-cli,
+    audacity,
+    vlc,
+    ffmpeg,
+    obs-studio,
+    timeshift
+  ]
+
+ubuntu_pkg:
+  [
+    virtualbox,
+    winetricks,
+    wine-stable,
+    android-tools-adb,
+    android-tools-fastboot,
+    git
+  ]
+
+fedora_pkg:
+  [
+    toolbox,
+    android-tools,
+    flatpak,
+    virt-manager,
+    steam,
+    fedora-workstation-repositories
+  ]
+
+fedora_repo_rpmfusion_free: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_version}}.noarch.rpm"
+fedora_repo_rpmfusion_nonfree: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_version}}.noarch.rpm"

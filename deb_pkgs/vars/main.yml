@@ -1,8 +1,0 @@
----
-urls:
-  vscode: "https://go.microsoft.com/fwlink/?LinkID=760868"
-  chrome: "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
-  insomnia: "https://github.com/Kong/insomnia/releases/download/designer%402020.5.2/Insomnia.Designer-2020.5.2.deb"
-  steam: "https://repo.steampowered.com/steam/archive/precise/steam_latest.deb"
-  discord: "https://discord.com/api/download?platform=linux&format=deb"
-  gitkraken: "https://release.axocdn.com/linux/gitkraken-amd64.deb"

@@ -1,0 +1,11 @@
+---
+- hosts: local
+  roles:
+    - repo_pkg
+    - external_pkg
+    - code
+    - ohmyzsh
+    - dropbox
+    - docker
+    - spotify
+    - shutdown

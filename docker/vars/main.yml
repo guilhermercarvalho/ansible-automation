@@ -1,0 +1,19 @@
+---
+os_release: "focal"
+
+fedora_prev_dep:
+  [
+    docker,
+    docker-client,
+    docker-client-latest,
+    docker-common,
+    docker-latest,
+    docker-latest-logrotate,
+    docker-logrotate,
+    docker-selinux,
+    docker-engine-selinux,
+    docker-engine,
+    podman-docker
+  ]
+
+ubuntu_prev_dep: [docker, docker-engine, docker.io, containerd, runc]

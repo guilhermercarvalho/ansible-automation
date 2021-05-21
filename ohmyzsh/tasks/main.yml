@@ -1,0 +1,88 @@
+---
+# Ubuntu
+- name: Install zsh packages and fonts
+  apt:
+    name: 
+      [
+        zsh,
+        zsh-common,
+        zsh-doc,
+        fonts-noto,
+        fonts-powerline,
+        fonts-firacode,
+        git
+      ]
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+# Fedora
+- name: Install zsh and fonts
+  yum:
+    name:
+      [
+        zsh,
+        powerline-fonts,
+        fira-code-fonts,
+        'google-noto-*-fonts',
+        git
+      ]
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Clone ohmyzsh repository
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: /tmp/ohmyzsh
+  become: no
+
+- name: Uninstall previus ohmyzsh installation
+  shell:
+    cmd: yes | sh /tmp/ohmyzsh/tools/uninstall.sh
+  become: no
+
+- name: Install ohmyzsh package
+  shell:
+    cmd: sh /tmp/ohmyzsh/tools/install.sh --unattended
+  become: no
+
+- name: Download antigen.zsh
+  get_url:
+    url: https://git.io/antigen
+    dest: $HOME/.antigen.zsh
+
+- name: Edit .antigen.zsh
+  replace:
+    path: $HOME/.antigen.zsh
+    regexp: 'antigen\.zsh'
+    replace: '.antigen.zsh'
+  become: no
+
+- name: Install zsh-completions
+  git:
+    repo: https://github.com/zsh-users/zsh-completions
+    dest: $HOME/.oh-my-zsh/custom/plugins/zsh-completions
+  become: no
+
+- name: Copy your custom .zshrc
+  copy:
+    src: zshrc.zsh-template.txt
+    dest: $HOME/.zshrc
+  become: no
+
+- name: Create project directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - $HOME/Documents/projects
+    - $HOME/Documents/projects/git
+    - $HOME/Documents/projects/git/ufms
+  become: no
+
+- name: Change default user shell to zsh
+  user:
+    name: "{{ default_user }}"
+    shell: /usr/bin/zsh
+  become: yes

@@ -1,8 +1,9 @@
 [all:vars]
-default_user="mint"
+default_user="guilherme"
 
 [local]
 localhost ansible_connection=local ansible_python_interpreter=python3 gather_facts=true
 
+# For test
 [vm]
-192.168.1.5 ansible_connection=ssh ansible_python_interpreter=python3 gather_facts=false ansible_user=mint
+*.*.*.* ansible_connection=ssh ansible_python_interpreter=python3 gather_facts=false ansible_user=guilherme

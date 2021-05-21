@@ -1,9 +1,0 @@
----
-- hosts: vm
-  roles:
-    - apt_pkgs
-    - deb_pkgs
-    - deb_dropbox
-    - apt_spotify
-    - custom_docker
-    - custom_ohmyzsh

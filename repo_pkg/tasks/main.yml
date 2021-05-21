@@ -1,0 +1,70 @@
+---
+# Fedora
+- name: Update YUM cache
+  yum:
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable RPM Fusion free
+  dnf:
+    name: "{{ fedora_repo_rpmfusion_free }}"
+    disable_gpg_check: yes
+    state: present
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Enable RPM Fusion nonfree
+  dnf:
+    name: "{{ fedora_repo_rpmfusion_nonfree }}"
+    disable_gpg_check: yes
+    state: present
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Upgrade packages
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install custom YUM packages
+  yum:
+    name: "{{ fedora_pkg }}"
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+# Ubuntu
+- name: Update APT cache
+  apt:
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Upgrade packages
+  apt:
+    name: "*"
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Upgrade distro
+  apt:
+    upgrade: dist
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install custom  APT packages
+  apt:
+    name: "{{ ubuntu_pkg }}"
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install custom packages
+  package:
+    name: "{{ pkgs }}"
+    state: latest
+  become: yes

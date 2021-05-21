@@ -1,0 +1,103 @@
+---
+# Ubuntu
+- name: Uninstall old previous installation
+  apt:
+    name: "{{ ubuntu_prev_dep }}"
+    state: absent
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install required system packages
+  apt:
+    name:
+      [
+        apt-transport-https,
+        ca-certificates,
+        curl,
+        gnupg-agent,
+        software-properties-common,
+      ]
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add docker GPG apt-key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+# Fedora
+- name: Uninstall old previous installation
+  yum:
+    name: "{{ fedora_prev_dep }}"
+    state: absent
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install required system packages
+  yum:
+    name: dnf-plugins-core
+    state: present
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Add docker stable repository
+  shell:
+    cmd: "dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo"
+    warn: false
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Update YUM cache
+  yum:
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install docker
+  yum:
+    name: [docker-ce, docker-ce-cli, containerd.io]
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Ensure group "docker" exists
+  group:
+    name: docker
+    state: present
+
+- name: Add default user to docker group
+  user:
+    name: "{{ default_user }}"
+    uid: 1000
+    groups: [docker]
+    append: yes
+  become: yes
+
+- name: Enable docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+    masked: no
+  become: yes
+
+- name: Install pip
+  package:
+    name: pip
+    state: latest
+  become: yes
+
+- name: Install docker-compose
+  pip:
+    name: docker-compose
+  become: yes

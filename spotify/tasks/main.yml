@@ -1,0 +1,49 @@
+---
+# Ubuntu
+- name: Add spotify GPG apt-key
+  apt_key:
+    url: "https://download.spotify.com/debian/pubkey_0D811D58.gpg"
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Add spotify repository
+  apt_repository:
+    repo: "deb http://repository.spotify.com stable non-free"
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install spotify
+  apt:
+    name: spotify-client
+    update_cache: yes
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+# Fedora
+- name: Install YUM flatpak
+  yum:
+    name: flatpak
+    state: present
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Add the flathub flatpak repository remote
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: user
+  # become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install spotify flatpak
+  flatpak:
+    name: com.spotify.Client
+    state: present
+    remote: flathub
+    method: user
+  # become: yes
+  when: ansible_distribution == 'Fedora'

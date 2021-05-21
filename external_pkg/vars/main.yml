@@ -1,0 +1,13 @@
+---
+rpm_url:
+  chrome: "https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm"
+  insomnia: https://github.com/Kong/insomnia/releases/download/core%402021.3.0/Insomnia.Core-2021.3.0.rpm
+  gitkraken: https://release.axocdn.com/linux/gitkraken-amd64.rpm
+  dropbox: https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-2020.03.04-1.fedora.x86_64.rpm
+
+deb_url:
+  vscode: https://go.microsoft.com/fwlink/?LinkID=760868
+  chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  insomnia: https://github.com/Kong/insomnia/releases/download/designer%402020.5.2/Insomnia.Designer-2020.5.2.deb
+  steam: https://repo.steampowered.com/steam/archive/precise/steam_latest.deb
+  gitkraken: https://release.axocdn.com/linux/gitkraken-amd64.deb

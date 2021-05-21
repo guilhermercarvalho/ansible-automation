@@ -1,0 +1,30 @@
+- name: Import key for Visual Studio Code repository
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Add Visual Studio Code repository
+  yum_repository:
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Update YUM cache
+  yum:
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Install code
+  yum:
+    name: code
+    state: latest
+  become: yes
+  when: ansible_distribution == 'Fedora'
