@@ -1,0 +1,4 @@
+packages:
+  spotify: com.spotify.Client
+  discord: com.discordapp.Discord
+  telegram: org.telegram.desktop
