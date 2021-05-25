@@ -21,29 +21,3 @@
     state: present
   become: yes
   when: ansible_distribution == 'Ubuntu'
-
-# Fedora
-- name: Install YUM flatpak
-  yum:
-    name: flatpak
-    state: present
-  become: yes
-  when: ansible_distribution == 'Fedora'
-
-- name: Add the flathub flatpak repository remote
-  flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-    method: user
-  # become: yes
-  when: ansible_distribution == 'Fedora'
-
-- name: Install spotify flatpak
-  flatpak:
-    name: com.spotify.Client
-    state: present
-    remote: flathub
-    method: user
-  # become: yes
-  when: ansible_distribution == 'Fedora'

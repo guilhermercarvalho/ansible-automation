@@ -1,0 +1,24 @@
+---
+- name: Install YUM flatpak
+  yum:
+    name: flatpak
+    state: present
+  become: yes
+  when: ansible_distribution == 'Fedora'
+
+- name: Add the flathub flatpak repository remote
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+    method: user
+  when: ansible_distribution == 'Fedora'
+
+- name: Install packages flatpak
+  flatpak:
+    name: "{{ item.value }}"
+    state: present
+    remote: flathub
+    method: user
+  with_items: "{{ lookup('dict', packages) }}"
+  when: ansible_distribution == 'Fedora'
